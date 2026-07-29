@@ -18,17 +18,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify AWS Identity
-        run: aws sts get-caller-identity
-
       - name: Install AWS CLI
         run: |
           python -m pip install --upgrade pip
           pip install awscli
-
-      - name: Package Lambda
-        run: |
-          zip -r deployment.zip app
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -36,6 +29,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      - name: Package Lambda
+        run: |
+          zip -r deployment.zip app
 
       - name: Deploy Lambda
         run: |
