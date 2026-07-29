@@ -1,0 +1,50 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install AWS CLI
+        run: |
+          pip install awscli
+
+      - name: Package Application
+        run: |
+          zip -r deployment.zip app
+
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+
+      - name: Deploy Development Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --zip-file fileb://deployment.zip
