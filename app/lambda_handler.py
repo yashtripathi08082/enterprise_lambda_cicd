@@ -1,7 +1,7 @@
 from app.service import get_message
 from app.utils import format_response
 
-# hgdjhavdjhavdgdgdhghg
+# hgdjhavdjhavdgdgdhghgygiyg
 def lambda_handler(event, context):
 
     return {
