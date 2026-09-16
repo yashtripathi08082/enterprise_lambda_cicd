@@ -1,7 +1,7 @@
 from app.service import get_message
 from app.utils import format_response
 
-# hgdjhavdjhavdgdgdhghgygiygjhgkjhbhjdfg
+
 def lambda_handler(event, context):
 
     return {
@@ -10,15 +10,9 @@ def lambda_handler(event, context):
     }
 
 
+#jnbdcjkhsdbfkjhsbdfkhsbkfhd
 
 
 
 
 
-
-# def lambda_handler(event, context):
-
-#     return {
-#         "statusCode": 200,
-#         "body": "Hello Enterprise CI/CD"
-#     }
