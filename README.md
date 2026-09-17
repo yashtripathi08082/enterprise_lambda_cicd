@@ -36,3 +36,5 @@ Phase 3: Deploy automatically to a Dev Lambda.
 Phase 4: Add GitHub Environments with manual approval before production.
 Phase 5: Replace access keys with OIDC + IAM Roles.
 Phase 6: Add caching, artifacts, release versioning, and rollback.
+
+Add-Content README.md "`nCI pipeline test"
