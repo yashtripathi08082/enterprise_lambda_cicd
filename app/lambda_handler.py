@@ -1,6 +1,4 @@
 from app.service import get_message
-from app.utils import format_response
-
 
 def lambda_handler(event, context):
 
@@ -8,9 +6,6 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": get_message()
     }
-
-
-#jnbdcjkhsdbfkjhsbdfkhsbkfhd
 
 
 
