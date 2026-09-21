@@ -1,12 +1,16 @@
 name: Deploy to Development
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
     branches:
       - develop
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     environment: development
@@ -47,3 +51,60 @@ jobs:
 
       - name: Deployment Successful
         run: echo "Lambda deployed successfully."
+
+
+
+
+
+
+
+
+# name: Deploy to Development
+
+# on:
+#   push:
+#     branches:
+#       - develop
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     environment: development
+
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
+
+#       - name: Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.12"
+
+#       - name: Install AWS CLI
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install awscli
+
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ap-south-1
+
+#       - name: Verify AWS Identity
+#         run: aws sts get-caller-identity
+
+#       - name: Package Lambda
+#         run: |
+#           zip -r deployment.zip app
+
+#       - name: Deploy Lambda
+#         run: |
+#           aws lambda update-function-code \
+#             --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+#             --zip-file fileb://deployment.zip
+
+#       - name: Deployment Successful
+#         run: echo "Lambda deployed successfully."
