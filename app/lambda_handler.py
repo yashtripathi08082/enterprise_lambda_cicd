@@ -1,24 +1,12 @@
 from app.service import get_message
-from app.utils import format_response
 
-# ihfiaehfkahfkh
+
 def lambda_handler(event, context):
-
     return {
         "statusCode": 200,
-        "body": get_message()
+        "body": get_message(),
     }
 
 
+# xzvxcvxckhvkjzxbvkjfsbvkjnjhbjhbjhbjhguygkghjhjghj
 
-#lkmelkdmkemdlkmeldkmekldmqkemdhbvhgv
-
-
-
-
-# def lambda_handler(event, context):
-
-#     return {
-#         "statusCode": 200,
-#         "body": "Hello Enterprise CI/CD"
-#     }
